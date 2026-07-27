@@ -1,10 +1,16 @@
-// swift-tools-version:5.5
+// swift-tools-version:6.4
 
 import PackageDescription
 
 let package = Package(
     name: "ReadingTimePublishPlugin",
-    platforms: [.macOS(.v12)],
+    // Files (via Publish) needs iOS 18 / tvOS 18 / watchOS 11 for Synchronization.Mutex.
+    platforms: [
+        .macOS(.v15),
+        .iOS(.v18),
+        .tvOS(.v18),
+        .watchOS(.v11)
+    ],
     products: [
         .library(
             name: "ReadingTimePublishPlugin",
@@ -12,7 +18,10 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(name: "Publish", url: "https://github.com/johnsundell/publish.git", from: "0.9.0"),
+        .package(
+            url: "https://github.com/brightdigit/Publish.git",
+            branch: "main"
+        ),
     ],
     targets: [
         .target(
